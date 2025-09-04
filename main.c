@@ -33,6 +33,40 @@ main()
    *  Print your collection of elements as specified in the handout
    *    as a comma delimited series of integers
    *-----------------------------------------------------------------*/
+char c;
+int count =0;
+int elements[100];
+int idx =0;
+
+while(1){
+  c =read_char();
+  if(c!='a'&& c!='b'&& c!='c')
+    break;
+  if(c=='a'){
+    elements[idx++]=count;
+    count++;
+  }
+  if(c=='b'){
+    count++;
+  }
+  if(c=='c'){
+    if(idx>0){
+      idx-1;
+    }
+    count++;
+  }
+  if(c=='q'){
+  break;}
+}
+  write_string("out=\"");
+  for(int i=0;i<idx; i++){
+    write_int(elements[i]);
+    write_char(',');
+  }
+  write_char(';');
+  write_char('"');
+  write_char('\n');
+
 
   return 0;
 }
