@@ -27,22 +27,25 @@ main()
   /* Next just read a char then write it.  Over and over again.
    * We will use the 'q' character as an indicator of when to
    * terminate.  */
-  char c;
+  int c;
   do 
     {
       c = read_char();
 
       /* Perform error checking */
-      if (c < 0) {
+      if (c == EOF) {
           /* There was an error.  Just break for now */
           break;
       }
 
+	if (c == 'q') {
+        break;
+	}
       /* Write c to stdout and increment counter*/
-      write_char(c);
+      write_char((char)c);
       count++;
     }
-  while (c != 'q'); /* quit when we see a q char */
+  while (c != 'q' && c != EOF); /* quit when we see a q char */
 
   write_char('\n');
   if (c == 'q') {
