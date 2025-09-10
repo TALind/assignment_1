@@ -10,6 +10,7 @@ read_char() {
   return EOF;
 }
 
+
 /* Writes c to stdout.  If no errors occur, it returns 0, otherwise EOF */
 int
 write_char(char c) {
@@ -29,3 +30,4 @@ int
 write_int(int n) {
   return EOF;
 }
+
