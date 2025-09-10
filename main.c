@@ -38,35 +38,38 @@ int count =0;
 int elements[100];
 int idx =0;
 
-while(1){
-  c =read_char();
+while((c =read_char())!=EOF){
+  
+
   if(c!='a'&& c!='b'&& c!='c')
     break;
   if(c=='a'){
     elements[idx++]=count;
     count++;
   }
-  if(c=='b'){
+  else if(c=='b'){
     count++;
   }
-  if(c=='c'){
-    if(idx>0){
-      idx-1;
+  else if(c=='c'){
+    if(idx > 0)
+    {
+      idx--;
     }
     count++;
   }
-  if(c=='q'){
-  break;}
+  
 }
-  write_string("out=\"");
-  for(int i=0;i<idx; i++){
+  // write_char('"');
+  for(int i = 0;i < idx; i++)
+  {
     write_int(elements[i]);
+    if(i<idx-1)
+    {
     write_char(',');
+    }
   }
   write_char(';');
-  write_char('"');
-  write_char('\n');
-
+  // write_char('\n');
 
   return 0;
 }
