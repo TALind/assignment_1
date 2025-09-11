@@ -1,7 +1,7 @@
 
 /* You are not allowed to use <stdio.h> */
 #include "io.h"
-
+#include <stdlib.h>
 
 /**
  * @name  main
@@ -9,18 +9,15 @@
  * @return 0 for success, anything else for failure
  *
  *
- * Then it has a place for you to implementation the command 
+ * Then it has a place for you to implementation the command
  * interpreter as  specified in the handout.
  */
-int
-main()
-{
   /*-----------------------------------------------------------------
    *TODO:  You need to implement the command line driver here as
    *       specified in the assignment handout.
    *
    * The following pseudo code describes what you need to do
-   *  
+   *
    *  Declare the counter and the collection structure variables
    *
    *
@@ -33,40 +30,61 @@ main()
    *  Print your collection of elements as specified in the handout
    *    as a comma delimited series of integers
    *-----------------------------------------------------------------*/
-char c;
-int count =0;
-int elements[100];
-int idx =0;
+typedef struct {
+  int *data;
+  int size;
+  int cap;
+} indexList;
 
-while(1){
-  c =read_char();
-  if(c!='a'&& c!='b'&& c!='c')
-    break;
-  if(c=='a'){
-    elements[idx++]=count;
-    count++;
-  }
-  if(c=='b'){
-    count++;
-  }
-  if(c=='c'){
-    if(idx>0){
-      idx-1;
-    }
-    count++;
-  }
-  if(c=='q'){
-  break;}
+static void list_init(indexList *list) {
+    list->cap = 8;
+	list->size = 0;
+	list->data = malloc(list->cap * sizeof(int));
 }
-  write_string("out=\"");
-  for(int i=0;i<idx; i++){
-    write_int(elements[i]);
-    write_char(',');
-  }
-  write_char(';');
-  write_char('"');
-  write_char('\n');
 
+static void list_push(indexList *list, int value) {
+    if (list->size >= list->cap) {
+	list->cap *= 2;
+	int *p= (int*)realloc(list->data, sizeof(int) * list->cap);
+	if (p == NULL) return; // realloc failed, keep using old buffer
+        list->data = p;
+	}
+	list->data[list->size++] = value;
+}
 
+static void list_free(indexList *list) {
+    free(list->data);
+    list->data = NULL;
+    list->size = 0;
+    list->cap = 0;
+}
+int main(void) {
+indexList pos;
+list_init(&pos);
+
+int idx = 0;
+int c;
+
+while (1) {
+c = read_char();
+if (c == EOF || c == 'q') break;
+if (c  == 'a') list_push(&pos, idx);
+idx++;
+}
+
+int first = 1;
+int *p = pos.data;
+int *end = pos.data + pos.size;
+
+while (p < end) {
+    if (!first) write_char(',');
+    write_int(*p);
+	first = 0;
+	p++;
+}
+write_char(';');
+write_char('\n');
+
+list_free(&pos);
   return 0;
 }
