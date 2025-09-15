@@ -17,10 +17,12 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="09035bfc-bd93-4324-8412-2307d45ac1ba" name="Changes" comment="updatet io_demo">
-      <change beforePath="$PROJECT_DIR$/.idea/editor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/editor.xml" afterDir="false" />
+    <list default="true" id="09035bfc-bd93-4324-8412-2307d45ac1ba" name="Changes" comment="updatet main.c">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmd_int" beforeDir="false" afterPath="$PROJECT_DIR$/cmd_int" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.o" beforeDir="false" afterPath="$PROJECT_DIR$/main.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.sh" beforeDir="false" afterPath="$PROJECT_DIR$/test.sh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -145,7 +147,8 @@
       <updated>1756977686548</updated>
       <workItem from="1756977688572" duration="4256000" />
       <workItem from="1756991911431" duration="5270000" />
-      <workItem from="1757534208809" duration="8796000" />
+      <workItem from="1757534208809" duration="10064000" />
+      <workItem from="1757961388138" duration="3686000" />
     </task>
     <task id="LOCAL-00001" summary="New Files">
       <option name="closed" value="true" />
@@ -171,7 +174,15 @@
       <option name="project" value="LOCAL" />
       <updated>1757540840809</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="updatet main.c">
+      <option name="closed" value="true" />
+      <created>1757584380800</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1757584380800</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -204,6 +215,7 @@
     <MESSAGE value="New Files" />
     <MESSAGE value="Updated io.c" />
     <MESSAGE value="updatet io_demo" />
-    <option name="LAST_COMMIT_MESSAGE" value="updatet io_demo" />
+    <MESSAGE value="updatet main.c" />
+    <option name="LAST_COMMIT_MESSAGE" value="updatet main.c" />
   </component>
 </project>

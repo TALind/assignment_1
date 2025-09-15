@@ -36,40 +36,58 @@ typedef struct {
   int cap;
 } indexList;
 
-static void list_init(indexList *list) {
+static void list(indexList *list) {
     list->cap = 8;
 	list->size = 0;
 	list->data = malloc(list->cap * sizeof(int));
 }
 
-static void list_push(indexList *list, int value) {
+static void push_List(indexList *list, int value) {
     if (list->size >= list->cap) {
-	list->cap *= 2;
-	int *p= (int*)realloc(list->data, sizeof(int) * list->cap);
+	int newCap = (list->cap == 0) ? 1 : list->cap * 2;
+    int *p = (int*)realloc(list->data, sizeof(int) * newCap);
 	if (p == NULL) return; // realloc failed, keep using old buffer
         list->data = p;
+		list->cap = newCap;
 	}
 	list->data[list->size++] = value;
 }
 
-static void list_free(indexList *list) {
+static void free_List(indexList *list) {
     free(list->data);
     list->data = NULL;
     list->size = 0;
     list->cap = 0;
 }
+
+static void pop_List(indexList *list) {
+    if (list->size > 0) {
+        list->size--;
+    }
+}
+
 int main(void) {
 indexList pos;
-list_init(&pos);
+list(&pos);
 
 int idx = 0;
 int c;
 
 while (1) {
 c = read_char();
-if (c == EOF || c == 'q') break;
-if (c  == 'a') list_push(&pos, idx);
-idx++;
+if (c == EOF) break;
+if (c != 'a' && c != 'b' && c != 'c') break;
+
+if (c  == 'a'){
+		push_List(&pos, idx);
+	} else if (c == 'b') {
+		// do nothing
+	} else if (c == 'c') {
+    	pop_List(&pos);
+	} else {
+    	break;
+	}
+	idx++;
 }
 
 int first = 1;
@@ -85,6 +103,6 @@ while (p < end) {
 write_char(';');
 write_char('\n');
 
-list_free(&pos);
+free_List(&pos);
   return 0;
 }
