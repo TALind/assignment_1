@@ -67,10 +67,11 @@ static void pop_List(indexList *list) {
 }
 
 int main(void) {
-indexList pos;
-list(&pos);
+indexList positions;
+list(&positions);
 
-int idx = 0;
+
+int index = 0;
 int c;
 
 while (1) {
@@ -79,20 +80,20 @@ if (c == EOF) break;
 if (c != 'a' && c != 'b' && c != 'c') break;
 
 if (c  == 'a'){
-		push_List(&pos, idx);
+		push_List(&positions, index);
 	} else if (c == 'b') {
 		// do nothing
 	} else if (c == 'c') {
-    	pop_List(&pos);
+    	pop_List(&positions);
 	} else {
     	break;
 	}
-	idx++;
+	index++;
 }
 
 int first = 1;
-int *p = pos.data;
-int *end = pos.data + pos.size;
+int *p = positions.data;
+int *end = positions.data + positions.size;
 
 while (p < end) {
     if (!first) write_char(',');
@@ -103,6 +104,6 @@ while (p < end) {
 write_char(';');
 write_char('\n');
 
-free_List(&pos);
+free_List(&positions);
   return 0;
 }
