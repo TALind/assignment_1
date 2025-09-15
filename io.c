@@ -60,42 +60,28 @@ write_string(char* s) {
  */
 int
 write_int(int n) {
-  char buffer[12];
-  int is_negative = 0;
-  int i = 0;
+	long m = n;
+	if (m < 0) {
+    	if (write_char('-') == EOF) {
+        	return EOF;
+    	}
+    	m = -m;
+	}
+	if (m == 0) return write_char('0');
 
-  long m = n;
-  if (m < 0) {
-    is_negative = 1;
-    m = -m;
-  }
 
-
-  if (m == 0) {
-    buffer[i++] = '0';
-  } else {
-    while (m > 0) {
-      buffer[i++] = (m % 10) + '0';
-      m /= 10;
+    /* Determine the number of digits in m */
+	unsigned long div = 1;
+	while ((unsigned long)(m / div) >= 10) {
+    	div *= 10;
     }
-  }
 
-  if (is_negative) {
-    buffer[i++] = '-';
-  }
-
-  for (int j = 0; j < i / 2; j++) {
-    char temp = buffer[j];
-    buffer[j] = buffer[i - j - 1];
-    buffer[i - j - 1] = temp;
-  }
-
-  buffer[i] = '\0';
-
-  ssize_t result = write(STDOUT_FILENO, buffer, i);
-
-  if (result == (ssize_t)i) {
+    /* Write each digit */
+	while (div > 0) {
+	char ch = (char) ('0' + (m / div) % 10);
+    	if (write_char(ch) == EOF) return EOF;
+	    m %= div;
+		div /= 10;
+	}
     return 0;
-  }
-  return EOF;
 }
