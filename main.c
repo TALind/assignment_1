@@ -1,6 +1,7 @@
 
 /* You are not allowed to use <stdio.h> */
 #include "io.h"
+#include<stdlib.h>
 
 
 /**
@@ -35,8 +36,10 @@ main()
    *-----------------------------------------------------------------*/
 char c;
 int count =0;
-int elements[100];
-int idx =0;
+int *elements= NULL;
+int size =0;
+int capacity =0;
+
 
 while((c =read_char())!=EOF){
   
@@ -44,26 +47,34 @@ while((c =read_char())!=EOF){
   if(c!='a'&& c!='b'&& c!='c')
     break;
   if(c=='a'){
-    elements[idx++]=count;
+    if(size>=capacity){
+      capacity =(capacity==0)?4: capacity*2;
+      elements = realloc(elements,capacity*sizeof(int));
+      if(elements==NULL){
+        write_string ("Memory allocation failed \n");
+        return 1;
+      }
+    }
+    elements[size++]=count;
     count++;
   }
   else if(c=='b'){
     count++;
   }
   else if(c=='c'){
-    if(idx > 0)
+    if(size > 0)
     {
-      idx--;
+      size--;
     }
     count++;
   }
   
 }
   // write_char('"');
-  for(int i = 0;i < idx; i++)
+  for(int i = 0;i < size; i++)
   {
     write_int(elements[i]);
-    if(i<idx-1)
+    if(i<size-1)
     {
     write_char(',');
     }
